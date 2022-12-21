@@ -10,7 +10,7 @@ const Header = ({
   setIsValidPresupuesto,
 }) => {
   return (
-    <header>
+    <header className="">
       <h1>Planificador de Gastos</h1>
 
       {isValidPresupuesto ? (

@@ -63,7 +63,7 @@ const Gasto = ({ gasto, setEditarGasto, eliminarGasto }) => {
             </div>
           </div>
 
-          <p className="cantidad-gasto">$ {cantidadGasto}</p>
+          <p className="cantidad-gasto">${cantidadGasto}</p>
         </div>
       </SwipeableListItem>
     </SwipeableList>
