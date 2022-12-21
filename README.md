@@ -1,3 +1,3 @@
-# control-presupuesto-proyecto
+# Ivanosquis project
 
-[Edit on StackBlitz ⚡️](https://stackblitz.com/edit/vitejs-vite-t7kfub)
+## made in stackblitz:)
