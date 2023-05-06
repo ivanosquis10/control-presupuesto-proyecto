@@ -1,62 +1,15 @@
-import { useState, useEffect } from 'react';
+import { useControl } from '../hook/useControl'
+import { usePresupuesto } from '../hook/usePresupuesto'
+import { CircularProgressbar, buildStyles } from 'react-circular-progressbar'
+import 'react-circular-progressbar/dist/styles.css'
+import { formatearPresupuesto } from '../helpers'
 
-import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
-
-import 'react-circular-progressbar/dist/styles.css';
-
-const ControlPresupuesto = ({
-  gastos,
-  setGastos,
-  presupuesto,
-  setPresupuesto,
-  setIsValidPresupuesto,
-}) => {
-  const [porcentaje, setPorcentaje] = useState(0);
-  const [disponible, setDisponible] = useState(0);
-  const [gastado, setGastado] = useState(0);
-
-  useEffect(() => {
-    // Usamos el .recuce para hacer los calculos del total
-    const totalGastado = gastos.reduce(
-      (total, gasto) => gasto.cantidadGasto + total,
-      0
-    );
-    const totalDisponible = presupuesto - totalGastado;
-
-    // Calcular el porcentaje gastado (grafica)
-    const nuevoPorcentaje = (
-      ((presupuesto - totalDisponible) / presupuesto) *
-      100
-    ).toFixed(2);
-
-    setDisponible(totalDisponible);
-    setGastado(totalGastado);
-
-    setTimeout(() => {
-      setPorcentaje(nuevoPorcentaje);
-    }, 1000);
-  }, [gastos]);
-
-  const handleResetApp = () => {
-    const resultado = confirm('¿Deseas eliminar presupuesto y gasto?');
-
-    if (resultado) {
-      setGastos([]);
-      setPresupuesto(0);
-      setIsValidPresupuesto(false);
-    }
-  };
-
-  // funcion que formatea el presupuesto
-  const formatearPresupuesto = (cantidad) => {
-    return cantidad.toLocaleString('en-US', {
-      style: 'currency',
-      currency: 'USD',
-    });
-  };
+const ControlPresupuesto = () => {
+  const { presupuesto, handleResetApp } = useControl()
+  const { porcentaje, disponible, gastado } = usePresupuesto()
 
   return (
-    <div className="contenedor-presupuesto contenedor sombra dos-columnas">
+    <div className='contenedor-presupuesto contenedor sombra dos-columnas'>
       <div>
         <CircularProgressbar
           value={porcentaje}
@@ -71,8 +24,8 @@ const ControlPresupuesto = ({
         />
       </div>
 
-      <div className="contenido-presupuesto">
-        <button className="reset-app" type="button" onClick={handleResetApp}>
+      <div className='contenido-presupuesto'>
+        <button className='reset-app' type='button' onClick={handleResetApp}>
           Reset App
         </button>
         <p>
@@ -88,7 +41,7 @@ const ControlPresupuesto = ({
         </p>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ControlPresupuesto;
+export default ControlPresupuesto

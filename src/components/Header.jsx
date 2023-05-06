@@ -1,35 +1,16 @@
-import ControlPresupuesto from './ControlPresupuesto';
-import NuevoPresupuesto from './NuevoPresupuesto';
+import { useControl } from '../hook/useControl'
+import ControlPresupuesto from './ControlPresupuesto'
+import NuevoPresupuesto from './NuevoPresupuesto'
 
-const Header = ({
-  gastos,
-  setGastos,
-  presupuesto,
-  setPresupuesto,
-  isValidPresupuesto,
-  setIsValidPresupuesto,
-}) => {
+const Header = () => {
+  const { isValidPresupuesto } = useControl()
   return (
-    <header className="">
+    <header>
       <h1>Planificador de Gastos</h1>
 
-      {isValidPresupuesto ? (
-        <ControlPresupuesto
-          gastos={gastos}
-          setGastos={setGastos}
-          presupuesto={presupuesto}
-          setPresupuesto={setPresupuesto}
-          setIsValidPresupuesto={setIsValidPresupuesto}
-        />
-      ) : (
-        <NuevoPresupuesto
-          presupuesto={presupuesto}
-          setPresupuesto={setPresupuesto}
-          setIsValidPresupuesto={setIsValidPresupuesto}
-        />
-      )}
+      {isValidPresupuesto ? <ControlPresupuesto /> : <NuevoPresupuesto />}
     </header>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header
